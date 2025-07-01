@@ -9,36 +9,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
-@ResponseBody
+@RestController
+@RequestMapping("/book")
 public class BookController {
 
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "/add-book",method = RequestMethod.POST)
+   @PostMapping
      public Book addBook(@RequestBody Book book){
         return bookService.addBook(book);
     }
 
-   @RequestMapping(value = "/find-all-book",method = RequestMethod.GET)
+  @GetMapping
     public List<Book> findAllBook(){
         return bookService.findAllBook();
    }
 
-   @RequestMapping(value = "/find-by-id",method = RequestMethod.GET)
-    public Book findById(int id){
+  @GetMapping("/id")
+    public Book findById(@RequestParam int id){
         return bookService.findById(id);
    }
 
 
-  //@RequestMapping(value = "/update-by-id/{id}", method = RequestMethod.PUT)
-   @RequestMapping(value = "/update-by-id",method = RequestMethod.PUT)
+  @PutMapping("/id")
     public Book updateById(@RequestParam int id, @RequestBody Book updateBook)  {
         return bookService.updateById(id,updateBook);
    }
 
-   @RequestMapping(value = "/delete-by-id" , method = RequestMethod.DELETE)
+ @DeleteMapping("/id")
     public Book deleteById(@RequestParam int id){
         return bookService.deleteById(id);
    }
